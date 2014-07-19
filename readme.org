@@ -108,3 +108,16 @@
                          evil-leader))
    #+end_src
 
+** Git
+
+   I use git for everything so =magit= is a must. I also like using
+   gitflow, but I've never used =magit-gitflow=. For now, I'm just
+   trying it out. If I don't end up using it, I'll remove it soon.
+
+   #+begin_src emacs-lisp
+     (require-packages '(magit
+                         magit-gitflow))
+
+     (require 'magit-gitflow)
+     (add-hook 'magit-mode-hook 'turn-on-magit-gitflow)
+   #+end_src
