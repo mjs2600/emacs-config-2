@@ -3,7 +3,7 @@
 ** Package Configurations
 
    First, I need to setup Package and Melpa.
-   
+
    #+begin_src emacs-lisp
      (require 'package)
      (add-to-list 'package-archives
@@ -15,18 +15,17 @@
    install it if it isn't.
 
    #+begin_src emacs-lisp
-     (defun require-package (package-name) 
+     (defun require-package (package-name)
        "Install a package if it isn't installed"
        (unless (package-installed-p package-name)
                (package-install package-name)))
-     
+
      (defun require-packages (package-names)
        "Install a list packages if they aren't installed"
        (dolist (package-name package-names)
          (require-package package-name)))
    #+end_src
 
-   
 ** Personal Information
 
    This is just some of my personal information, which I'd like to
@@ -41,16 +40,15 @@
 
    #+begin_src emacs-lisp
      (setq password-file "~/.passwords.gpg")
-     (and (file-exists-p password-file) 
+     (and (file-exists-p password-file)
           (load-file password-file))
    #+end_src
 
-   
 ** Basic Configuration
 
    The purpose of this section is to make emacs a little more
    usable. I'll start by turning on =ido-mode=.
-   
+
    #+begin_src emacs-lisp
      (ido-mode t)
    #+end_src
@@ -108,6 +106,5 @@
    #+begin_src emacs-lisp
      (require-packages '(evil
                          evil-leader))
-     
    #+end_src
 
