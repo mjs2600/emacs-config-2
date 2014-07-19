@@ -37,15 +37,13 @@
      (setq user-mail-address "mjs2600@gmail.com")
    #+end_src
 
-   This is loads passwords into emacs on load if there's a password
-   file.
+   This loads passwords into emacs if there's a password file.
 
    #+begin_src emacs-lisp
      (setq password-file "~/.passwords.gpg")
      (and (file-exists-p password-file) 
           (load-file password-file))
    #+end_src
-
 
    
 ** Basic Configuration
