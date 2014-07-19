@@ -1,0 +1,115 @@
+* Emacs Config
+
+** Package Configurations
+
+   First, I need to setup Package and Melpa.
+   
+   #+begin_src emacs-lisp
+     (require 'package)
+     (add-to-list 'package-archives
+                  '("melpa" . "http://melpa.milkbox.net/packages/") t)
+     (package-initialize)
+   #+end_src
+
+   Next, I'll define a function to check if a package is installed and
+   install it if it isn't.
+
+   #+begin_src emacs-lisp
+     (defun require-package (package-name) 
+       "Install a package if it isn't installed"
+       (unless (package-installed-p package-name)
+               (package-install package-name)))
+     
+     (defun require-packages (package-names)
+       "Install a list packages if they aren't installed"
+       (dolist (package-name package-names)
+         (require-package package-name)))
+   #+end_src
+
+   
+** Personal Information
+
+   This is just some of my personal information, which I'd like to
+   have available.
+
+   #+begin_src emacs-lisp
+     (setq user-full-name "Michael Simpson")
+     (setq user-mail-address "mjs2600@gmail.com")
+   #+end_src
+
+   This is loads passwords into emacs on load if there's a password
+   file.
+
+   #+begin_src emacs-lisp
+     (setq password-file "~/.passwords.gpg")
+     (and (file-exists-p password-file) 
+          (load-file password-file))
+   #+end_src
+
+
+   
+** Basic Configuration
+
+   The purpose of this section is to make emacs a little more
+   usable. I'll start by turning on =ido-mode=.
+   
+   #+begin_src emacs-lisp
+     (ido-mode t)
+   #+end_src
+
+   The next step is to use =smex=, which does the same thing as ido
+   mode, but for M-x.
+
+   #+begin_src emacs-lisp
+     (require-package 'smex)
+     (smex-initialize)
+     (global-set-key (kbd "M-x") 'smex)
+   #+end_src
+
+** ELisp
+
+   The next thing I'll need to feel more at home is better ELisp
+   support. I'll start by adding =smartparens=.
+
+   #+begin_src emacs-lisp
+     (require-package 'smartparens)
+     (require 'smartparens-config)
+     (smartparens-global-mode 1)
+   #+end_src
+
+   Now, let's make it easier to tell all of the parens apart with
+   =rainbow-delimiters=.
+
+   #+begin_src emacs-lisp
+     (require-package 'rainbow-delimiters)
+     (global-rainbow-delimiters-mode)
+   #+end_src
+
+
+** Style
+
+   Let's my Emacs a little prettier. First thing I'll do pick a color
+   scheme. =zenburn= looks nice enough for now.
+
+   #+begin_src emacs-lisp
+     (require-package 'zenburn-theme)
+     (load-theme 'zenburn)
+   #+end_src
+
+   =pretty-mode= always makes things look a little nicer too.
+
+   #+begin_src emacs-lisp
+     (require-package 'pretty-mode)
+     (global-pretty-mode)
+   #+end_src
+
+** eVIl
+
+   First, I need to require all of the eVIl packages that I'll use.
+
+   #+begin_src emacs-lisp
+     (require-packages '(evil
+                         evil-leader))
+     
+   #+end_src
+
