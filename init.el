@@ -1,14 +1,25 @@
-;;; Initialize --- Provides local customizations
+;; this is the stuff set by Emacs
 
-;;; Commentary:
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes (quote ("146d24de1bb61ddfa64062c29b5ff57065552a7c4019bee5d869e938782dfc2a" default))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
 
-;;; Code:
+;; This is just loads readme.org
 
 (require 'org)
-(org-babel-load-file "~/.emacs.d/readme.org")
 
-;(require 'rss-config)
-;(require 'social-config)
+(org-babel-load-file "readme.org")
 
-(provide 'personal-init)
-;;; personal-init ends here
+(let ((compiled-elisp "readme.el"))
+  (if (file-exists-p compiled-elisp)
+      (delete-file compiled-elisp)))
+
