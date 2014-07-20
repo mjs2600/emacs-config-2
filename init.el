@@ -13,13 +13,13 @@
  ;; If there is more than one, they won't work right.
  )
 
+
 ;; This is just loads readme.org
 
 (require 'org)
 
-(org-babel-load-file "readme.org")
+(org-babel-load-file "~/.emacs.d/readme.org")
 
-(let ((compiled-elisp "readme.el"))
+(let ((compiled-elisp "~/.emacs.d/readme.el"))
   (if (file-exists-p compiled-elisp)
       (delete-file compiled-elisp)))
-
