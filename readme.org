@@ -1,6 +1,6 @@
-* Emacs Config
+Emacs Config
 
-** Package Configurations
+* Package Configurations
 
    First, I need to setup Package and Melpa.
 
@@ -26,7 +26,7 @@
          (require-package package-name)))
    #+end_src
 
-** Personal Information
+* Personal Information
 
    This is just some of my personal information, which I'd like to
    have available.
@@ -44,7 +44,7 @@
           (load-file password-file))
    #+end_src
 
-** Basic Configuration
+* Basic Configuration
 
    The purpose of this section is to make emacs a little more
    usable. I'll start by turning on =ido-mode=.
@@ -81,8 +81,7 @@
      (global-rainbow-delimiters-mode)
    #+end_src
 
-
-** Style
+* Style
 
    Let's my Emacs a little prettier. First thing I'll do pick a color
    scheme. =zenburn= looks nice enough for now.
@@ -99,16 +98,61 @@
      (global-pretty-mode)
    #+end_src
 
-** eVIl
+* eVIl
 
    First, I need to require all of the eVIl packages that I'll use.
 
    #+begin_src emacs-lisp
      (require-packages '(evil
-                         evil-leader))
+                         evil-leader
+                         evil-surround))
    #+end_src
 
-** Git
+   Next I need to turn on evil-mode.
+
+   #+begin_src emacs-lisp
+     (evil-mode t)
+     (global-evil-leader-mode t)
+     (global-evil-surround-mode t)
+   #+end_src
+
+   Now I'll setup my leader key to make it match my vim setup.
+
+   #+begin_src emacs-lisp
+     (evil-leader/set-leader "<SPC>")
+
+     (evil-leader/set-key
+       "b" 'ido-switch-buffer
+       "f" 'ido-find-file
+       "k" 'ido-kill-buffer
+       "m" 'eshell
+       "s" 'ack
+       "x" 'smex)
+   #+end_src
+
+
+** Elixir
+
+   I need to setup some Elixir specific leader bindings.
+
+   #+begin_src emacs-lisp
+     (evil-leader/set-key-for-mode 'elixir-mode
+       "t" 'elixir-mix-test)
+   #+end_src
+
+* YASnippets
+
+   I'll need something to manage snippets.
+
+   #+begin_src emacs-lisp
+     (require-package 'yasnippet)
+     (yas-global-mode 1)
+   #+end_src
+
+* Entertainment
+** RSS
+
+* Git
 
    I use git for everything so =magit= is a must. I also like using
    gitflow, but I've never used =magit-gitflow=. For now, I'm just
