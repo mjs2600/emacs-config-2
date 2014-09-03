@@ -171,6 +171,13 @@ Emacs Config
      (require 'magit-gitflow)
      (add-hook 'magit-mode-hook 'turn-on-magit-gitflow)
    #+end_src
+* Markdown
+
+  I need markdown support for notes
+
+  #+begin_src emacs-lisp
+    (require-package 'markdown-mode)
+  #+end_src
 * Keybindings
 
   #+begin_src emacs-lisp
