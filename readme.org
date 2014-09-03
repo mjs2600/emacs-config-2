@@ -62,6 +62,12 @@ Emacs Config
      (global-set-key (kbd "M-x") 'smex)
    #+end_src
 
+   I'd also like to make sure that I'm using the latest version of org-mode.
+
+   #+begin_src emacs-lisp
+      (require-package 'org)
+   #+end_src
+
 ** ELisp
 
    The next thing I'll need to feel more at home is better ELisp
