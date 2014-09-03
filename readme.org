@@ -110,6 +110,12 @@ Emacs Config
      (add-hook 'before-save-hook 'delete-trailing-whitespace)
    #+end_src
 
+   Remove the tool-bar.
+
+   #+begin_src emacs-lisp
+     (tool-bar-mode 0)
+   #+end_src
+
 * eVIl
 
    First, I need to require all of the eVIl packages that I'll use.
