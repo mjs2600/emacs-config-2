@@ -98,6 +98,12 @@ Emacs Config
      (global-pretty-mode)
    #+end_src
 
+   Delete trailing whitespace on save.
+
+   #+begin_src emacs-lisp
+     (add-hook 'before-save-hook 'delete-trailing-whitespace)
+   #+end_src
+
 * eVIl
 
    First, I need to require all of the eVIl packages that I'll use.
