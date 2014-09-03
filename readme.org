@@ -124,12 +124,18 @@ Emacs Config
      (evil-leader/set-key
        "b" 'ido-switch-buffer
        "f" 'ido-find-file
+       "g" 'magit-status
        "k" 'ido-kill-buffer
        "m" 'eshell
        "s" 'ack
        "x" 'smex)
    #+end_src
 
+   Disable evil in certain modes
+
+   #+begin_src emacs-lisp
+     (evil-set-initial-state 'magit-log-edit-mode 'emacs)
+   #+end_src
 
 ** Elixir
 
