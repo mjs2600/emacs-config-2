@@ -171,3 +171,10 @@ Emacs Config
      (require 'magit-gitflow)
      (add-hook 'magit-mode-hook 'turn-on-magit-gitflow)
    #+end_src
+* Social
+
+  Add Twitter support
+
+  #+begin_src emacs-lisp
+    (require-package 'twittering-mode)
+  #+end_src
