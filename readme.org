@@ -171,6 +171,14 @@ Emacs Config
      (require 'magit-gitflow)
      (add-hook 'magit-mode-hook 'turn-on-magit-gitflow)
    #+end_src
+* Keybindings
+
+  #+begin_src emacs-lisp
+    (global-set-key (kbd "C-x m") 'eshell)
+    (global-set-key (kbd "C-c r") 'ielm)
+    (global-set-key (kbd "C-c g") 'magit)
+
+  #+end_src
 * Social
 
   Add Twitter support
