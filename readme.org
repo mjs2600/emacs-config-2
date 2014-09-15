@@ -129,10 +129,28 @@ Emacs Config
      (add-hook 'before-save-hook 'delete-trailing-whitespace)
    #+end_src
 
+   Never use tabs
+
+   #+begin_src emacs-lisp
+     (setq-default indent-tabs-mode nil)
+   #+end_src
+
+   Use 2 spaces unless I specify another value
+
+   #+begin_src emacs-lisp
+     (setq tab-width 2)
+   #+end_src
+
    Remove the tool-bar.
 
    #+begin_src emacs-lisp
      (tool-bar-mode 0)
+   #+end_src
+
+   Use the default windmove bindings
+
+   #+begin_src emacs-lisp
+     (windmove-default-keybindings)
    #+end_src
 
 * eVIl
@@ -160,7 +178,8 @@ Emacs Config
 
      (evil-leader/set-key
        "b" 'ido-switch-buffer
-       "f" 'file-finder
+       "ff" 'file-finder
+       "fg" 'ido-find-file
        "g" 'magit-status
        "k" 'ido-kill-buffer
        "m" 'eshell
@@ -182,6 +201,17 @@ Emacs Config
      (evil-leader/set-key-for-mode 'elixir-mode
        "t" 'elixir-mix-test)
    #+end_src
+
+* eShell
+
+    eShell is amazing, but these settings make it better.
+
+    #+begin_src emacs-lisp
+      (setq eshell-cmpl-ignore-case t)
+      (defadvice ansi-term (after advise-ansi-term-coding-system)
+        (set-buffer-process-coding-system 'utf-8-unix 'utf-8-unix))
+      (ad-activate 'ansi-term)
+    #+end_src
 
 * YASnippets
 
