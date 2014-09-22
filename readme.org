@@ -153,6 +153,12 @@ Emacs Config
      (windmove-default-keybindings)
    #+end_src
 
+   Use y/n instead of yes/no
+
+   #+begin_src emacs-lisp
+     (defalias 'yes-or-no-p 'y-or-n-p)
+   #+end_src
+
 * eVIl
 
    First, I need to require all of the eVIl packages that I'll use.
