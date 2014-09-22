@@ -231,7 +231,33 @@ Emacs Config
 * Entertainment
 ** RSS
 
+
+** Music
+
+   Pandora!
+
+   #+begin_src emacs-lisp
+     (require-package 'pianobar)
+   #+end_src
 * Code
+** Web
+
+   Kind of hard without web-mode.
+
+   #+begin_src emacs-lisp
+     (require-package 'web-mode)
+   #+end_src
+
+** Ruby
+
+   I use rbenv, so support for that is important.
+
+   #+begin_src emacs-lisp
+     (setq rbenv-installation-dir "/usr/local/var/rbenv")
+     (require-package 'rbenv)
+     (global-rbenv-mode)
+   #+end_src
+
 
 ** Git
 
