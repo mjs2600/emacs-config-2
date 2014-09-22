@@ -289,7 +289,7 @@ Emacs Config
   #+begin_src emacs-lisp
     (global-set-key (kbd "C-x m") 'eshell)
     (global-set-key (kbd "C-c r") 'ielm)
-    (global-set-key (kbd "C-c g") 'magit)
+    (global-set-key (kbd "C-c g") 'magit-status)
     (global-set-key (kbd "C-c f") 'file-finder)
   #+end_src
 * Social
