@@ -87,6 +87,12 @@ Emacs Config
       (require-package 'org)
    #+end_src
 
+   Turn on column number mode, which shows =(row,column)=.
+
+   #+begin_src emacs-lisp
+     (column-number-mode t)
+   #+end_src
+
 ** ELisp
 
    The next thing I'll need to feel more at home is better ELisp
