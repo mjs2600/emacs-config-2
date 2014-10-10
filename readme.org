@@ -93,6 +93,13 @@ Emacs Config
      (column-number-mode t)
    #+end_src
 
+   I don't normally pair with people in emacs, so it's helpful to have
+   the buffer in emacs stay in sync with the file on disk.
+
+   #+begin_src emacs-lisp
+      (global-auto-revert-mode t)
+   #+end_src
+
 ** ELisp
 
    The next thing I'll need to feel more at home is better ELisp
@@ -109,7 +116,6 @@ Emacs Config
 
    #+begin_src emacs-lisp
      (require-package 'rainbow-delimiters)
-     (global-rainbow-delimiters-mode)
    #+end_src
 
 * Style
@@ -165,6 +171,10 @@ Emacs Config
      (defalias 'yes-or-no-p 'y-or-n-p)
    #+end_src
 
+   #+begin_src emacs-lisp
+     (global-linum-mode t)
+   #+end_src
+
 * eVIl
 
    First, I need to require all of the eVIl packages that I'll use.
@@ -178,7 +188,7 @@ Emacs Config
    Next I need to turn on evil-mode.
 
    #+begin_src emacs-lisp
-     (evil-mode t)
+     ;(evil-mode t)
      (global-evil-leader-mode t)
      (global-evil-surround-mode t)
    #+end_src
@@ -190,6 +200,7 @@ Emacs Config
 
      (evil-leader/set-key
        "b" 'ido-switch-buffer
+       "d" 'ido-dired
        "ff" 'file-finder
        "fg" 'ido-find-file
        "g" 'magit-status
@@ -246,6 +257,29 @@ Emacs Config
      (require-package 'pianobar)
    #+end_src
 * Code
+  I'm giving flycheck a try for syntax checking.
+
+  #+begin_src emacs-lisp
+    (require-package 'flycheck)
+
+  #+end_src
+
+
+** Documentation
+
+    #+begin_src emacs-lisp
+      (if (eq system-type 'darwin)
+          (require-package 'dash-at-point)
+          (require-package 'zeal-at-point))
+
+
+      (defun doc-at-point ()
+        "An OS agnostic external documentation lookup function."
+        (interactive)
+        (if (eq system-type 'darwin)
+            (dash-at-point)
+          (zeal-at-point)))
+    #+end_src
 ** Web
 
    Kind of hard without web-mode.
@@ -263,7 +297,6 @@ Emacs Config
      (require-package 'rbenv)
      (global-rbenv-mode)
    #+end_src
-
 
 ** Git
 
@@ -283,6 +316,24 @@ Emacs Config
      #+begin_src emacs-lisp
        (require-package 'elixir-mode)
      #+end_src
+** Haskell
+
+     #+begin_src emacs-lisp
+       (require-packages '(haskell-mode
+                           shm
+                           flycheck-haskell))
+
+       (require 'shm)
+
+       (setq exec-path (append exec-path '("~/.cabal/bin")))
+     #+end_src
+
+   Haskell mode configuration.
+
+   #+begin_src emacs-lisp
+     (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+     (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+   #+end_src
 ** Markdown
 
    I need markdown support for notes
@@ -290,6 +341,16 @@ Emacs Config
    #+begin_src emacs-lisp
      (require-package 'markdown-mode)
    #+end_src
+** Clojure
+
+Packages
+
+  #+begin_src emacs-lisp
+    (require-packages '(clojure-mode
+                        cider
+                        cljsbuild-mode))
+  #+end_src
+
 * Keybindings
 
   #+begin_src emacs-lisp
@@ -304,4 +365,22 @@ Emacs Config
 
   #+begin_src emacs-lisp
     (require-package 'twittering-mode)
+  #+end_src
+
+  Add Jabber support
+
+  #+begin_src emacs-lisp
+    (require-package 'jabber)
+
+    (setq jabber-account-list
+          '(("mjs2600@gmail.com"
+             (:network-server . "talk.google.com")
+             (:connection-type . ssl))
+            ("mike.simpson@scimedsolutions.com"
+             (:network-server . "talk.google.com")
+             (:connection-type . ssl))))
+
+    (setq jabber-vcard-avatars-retrieve nil)
+    (setq jabber-mode-line-mode t)
+    (setq jabber-show-offline-contacts nil)
   #+end_src
