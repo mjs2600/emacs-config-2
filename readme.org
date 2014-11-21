@@ -45,7 +45,7 @@ Emacs Config
    #+end_src
 
 * Basic Configuration
-
+  
    The purpose of this section is to make emacs a little more
    usable. I'll start by turning on =ido-mode=.
 
@@ -60,6 +60,20 @@ Emacs Config
      (require-package 'smex)
      (smex-initialize)
      (global-set-key (kbd "M-x") 'smex)
+   #+end_src
+   
+   I'm also going to create a function to open this file.
+
+   #+begin_src emacs-lisp
+     (defun open-dot-file ()
+       (interactive)
+       (find-file "~/.emacs.d/readme.org"))
+   #+end_src
+   
+   I'll also need to add all of the files in =./lib=.
+
+   #+begin_src emacs-lisp
+     (add-to-list 'load-path "~/.emacs.d/lib/")
    #+end_src
 
 ** ELisp
@@ -98,6 +112,12 @@ Emacs Config
      (global-pretty-mode)
    #+end_src
 
+   Let's get rid of the toolbar while we're at it.
+   
+#+begin_src emacs-lisp
+  (tool-bar-mode -1)
+#+end_src
+
 * eVIl
 
    First, I need to require all of the eVIl packages that I'll use.
@@ -116,6 +136,12 @@ Emacs Config
      (global-evil-surround-mode t)
    #+end_src
 
+   I'll disable it for a couple of modes.
+
+    #+begin_src emacs-lisp
+      (evil-set-initial-state 'pianobar 'emacs)
+    #+end_src
+
    Now I'll setup my leader key to make it match my vim setup.
 
    #+begin_src emacs-lisp
@@ -127,7 +153,8 @@ Emacs Config
        "k" 'ido-kill-buffer
        "m" 'eshell
        "s" 'ack
-       "x" 'smex)
+       "x" 'smex
+       "." 'open-dot-file)
    #+end_src
 
 
@@ -152,6 +179,32 @@ Emacs Config
 * Entertainment
 ** RSS
 
+
+** Pandora
+    #+begin_src emacs-lisp
+      (setq pianobar-username "xodis2600@gmail.com")
+      (require 'pianobar)
+    #+end_src
+ 
+* Social
+
+** IRC
+   
+   I like to ignore people coming and going in IRC so I can read the
+   actual messages.
+
+    #+begin_src emacs-lisp
+      (setq erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT"))
+    #+end_src
+
+** Twitter
+
+   Twittering mode is great for twitter.
+
+   #+begin_src emacs-lisp
+     (require-package 'twittering-mode)
+   #+end_src
+
 * Git
 
    I use git for everything so =magit= is a must. I also like using
@@ -165,3 +218,7 @@ Emacs Config
      (require 'magit-gitflow)
      (add-hook 'magit-mode-hook 'turn-on-magit-gitflow)
    #+end_src
+
+* eShell
+  
+  
