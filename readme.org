@@ -22,8 +22,14 @@ Emacs Config
 
      (defun require-packages (package-names)
        "Install a list packages if they aren't installed"
-       (dolist (package-name package-names)
-         (require-package package-name)))
+       (cond ((symbolp package-names)
+              (require-package package-names)
+             ((listp package-names)
+              (dolist (package-name package-names)
+                (require-package package-name)))
+             (t
+              ;; We handle only symbols and lists.
+              (error "Invalid argument %s in require-packages." pakage-names)))))
    #+end_src
 
 * Personal Information
@@ -44,8 +50,27 @@ Emacs Config
           (load-file password-file))
    #+end_src
 
+* Utilites
+
+  I'm including projectile to help find things.
+
+  #+begin_src emacs-lisp
+    (require-package 'projectile)
+    (projectile-global-mode t)
+  #+end_src
+
+  This is my file finder. It uses projectile if you're in a project and ido-find-file if you aren't.
+
+  #+begin_src emacs-lisp
+    (defun file-finder ()
+      (interactive)
+      (if (projectile-project-p)
+          (projectile-find-file)
+          (ido-find-file)))
+  #+end_src
+
 * Basic Configuration
-  
+
    The purpose of this section is to make emacs a little more
    usable. I'll start by turning on =ido-mode=.
 
@@ -61,7 +86,7 @@ Emacs Config
      (smex-initialize)
      (global-set-key (kbd "M-x") 'smex)
    #+end_src
-   
+
    I'm also going to create a function to open this file.
 
    #+begin_src emacs-lisp
@@ -69,11 +94,30 @@ Emacs Config
        (interactive)
        (find-file "~/.emacs.d/readme.org"))
    #+end_src
-   
+
    I'll also need to add all of the files in =./lib=.
 
    #+begin_src emacs-lisp
      (add-to-list 'load-path "~/.emacs.d/lib/")
+   #+end_src
+
+   I'd also like to make sure that I'm using the latest version of org-mode.
+
+   #+begin_src emacs-lisp
+      (require-package 'org)
+   #+end_src
+
+   Turn on column number mode, which shows =(row,column)=.
+
+   #+begin_src emacs-lisp
+     (column-number-mode t)
+   #+end_src
+
+   I don't normally pair with people in emacs, so it's helpful to have
+   the buffer in emacs stay in sync with the file on disk.
+
+   #+begin_src emacs-lisp
+      (global-auto-revert-mode t)
    #+end_src
 
 ** ELisp
@@ -92,7 +136,6 @@ Emacs Config
 
    #+begin_src emacs-lisp
      (require-package 'rainbow-delimiters)
-     (global-rainbow-delimiters-mode)
    #+end_src
 
 * Style
@@ -113,10 +156,44 @@ Emacs Config
    #+end_src
 
    Let's get rid of the toolbar while we're at it.
-   
-#+begin_src emacs-lisp
-  (tool-bar-mode -1)
-#+end_src
+
+   #+begin_src emacs-lisp
+     (tool-bar-mode -1)
+   #+end_src
+
+   Delete trailing whitespace on save.
+
+   #+begin_src emacs-lisp
+     (add-hook 'before-save-hook 'delete-trailing-whitespace)
+   #+end_src
+
+   Never use tabs
+
+   #+begin_src emacs-lisp
+     (setq-default indent-tabs-mode nil)
+   #+end_src
+
+   Use 2 spaces unless I specify another value
+
+   #+begin_src emacs-lisp
+     (setq tab-width 2)
+   #+end_src
+
+   Use the default windmove bindings
+
+   #+begin_src emacs-lisp
+     (windmove-default-keybindings)
+   #+end_src
+
+   Use y/n instead of yes/no
+
+   #+begin_src emacs-lisp
+     (defalias 'yes-or-no-p 'y-or-n-p)
+   #+end_src
+
+   #+begin_src emacs-lisp
+     (global-linum-mode t)
+   #+end_src
 
 * eVIl
 
@@ -131,7 +208,7 @@ Emacs Config
    Next I need to turn on evil-mode.
 
    #+begin_src emacs-lisp
-     (evil-mode t)
+     ;(evil-mode t)
      (global-evil-leader-mode t)
      (global-evil-surround-mode t)
    #+end_src
@@ -149,7 +226,10 @@ Emacs Config
 
      (evil-leader/set-key
        "b" 'ido-switch-buffer
-       "f" 'ido-find-file
+       "d" 'ido-dired
+       "ff" 'file-finder
+       "fg" 'ido-find-file
+       "g" 'magit-status
        "k" 'ido-kill-buffer
        "m" 'eshell
        "s" 'ack
@@ -157,6 +237,11 @@ Emacs Config
        "." 'open-dot-file)
    #+end_src
 
+   Disable evil in certain modes
+
+   #+begin_src emacs-lisp
+     (evil-set-initial-state 'magit-log-edit-mode 'emacs)
+   #+end_src
 
 ** Elixir
 
@@ -166,6 +251,17 @@ Emacs Config
      (evil-leader/set-key-for-mode 'elixir-mode
        "t" 'elixir-mix-test)
    #+end_src
+
+* eShell
+
+    eShell is amazing, but these settings make it better.
+
+    #+begin_src emacs-lisp
+      (setq eshell-cmpl-ignore-case t)
+      (defadvice ansi-term (after advise-ansi-term-coding-system)
+        (set-buffer-process-coding-system 'utf-8-unix 'utf-8-unix))
+      (ad-activate 'ansi-term)
+    #+end_src
 
 * YASnippets
 
@@ -179,17 +275,18 @@ Emacs Config
 * Entertainment
 ** RSS
 
+<<<<<<< HEAD
 
 ** Pandora
     #+begin_src emacs-lisp
       (setq pianobar-username "xodis2600@gmail.com")
       (require 'pianobar)
     #+end_src
- 
+
 * Social
 
 ** IRC
-   
+
    I like to ignore people coming and going in IRC so I can read the
    actual messages.
 
@@ -206,19 +303,142 @@ Emacs Config
    #+end_src
 
 * Git
+=======
+>>>>>>> dcdee5aba717b94ee5bb7ad1c1e96d419f92810b
 
-   I use git for everything so =magit= is a must. I also like using
-   gitflow, but I've never used =magit-gitflow=. For now, I'm just
-   trying it out. If I don't end up using it, I'll remove it soon.
+** Music
+
+   Pandora!
 
    #+begin_src emacs-lisp
-     (require-packages '(magit
-                         magit-gitflow))
+     (require-package 'pianobar)
+   #+end_src
+* Code
+  I'm giving flycheck a try for syntax checking.
 
-     (require 'magit-gitflow)
-     (add-hook 'magit-mode-hook 'turn-on-magit-gitflow)
+  #+begin_src emacs-lisp
+    (require-package 'flycheck)
+
+  #+end_src
+
+
+** Documentation
+
+    #+begin_src emacs-lisp
+      (if (eq system-type 'darwin)
+          (require-package 'dash-at-point)
+          (require-package 'zeal-at-point))
+
+
+      (defun doc-at-point ()
+        "An OS agnostic external documentation lookup function."
+        (interactive)
+        (if (eq system-type 'darwin)
+            (dash-at-point)
+          (zeal-at-point)))
+    #+end_src
+** Web
+
+   Kind of hard without web-mode.
+
+   #+begin_src emacs-lisp
+     (require-package 'web-mode)
    #+end_src
 
-* eShell
-  
-  
+** Ruby
+
+   I use rbenv, so support for that is important.
+
+   #+begin_src emacs-lisp
+     (setq rbenv-installation-dir "/usr/local/var/rbenv")
+     (require-package 'rbenv)
+     (global-rbenv-mode)
+   #+end_src
+
+** Git
+
+    I use git for everything so =magit= is a must. I also like using
+    gitflow, but I've never used =magit-gitflow=. For now, I'm just
+    trying it out. If I don't end up using it, I'll remove it soon.
+
+    #+begin_src emacs-lisp
+      (require-packages '(magit
+                          magit-gitflow))
+
+      (require 'magit-gitflow)
+      (add-hook 'magit-mode-hook 'turn-on-magit-gitflow)
+    #+end_src
+** Elixir
+
+     #+begin_src emacs-lisp
+       (require-package 'elixir-mode)
+     #+end_src
+** Haskell
+
+     #+begin_src emacs-lisp
+       (require-packages '(haskell-mode
+                           shm
+                           flycheck-haskell))
+
+       (require 'shm)
+
+       (setq exec-path (append exec-path '("~/.cabal/bin")))
+     #+end_src
+
+   Haskell mode configuration.
+
+   #+begin_src emacs-lisp
+     (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+     (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+   #+end_src
+** Markdown
+
+   I need markdown support for notes
+
+   #+begin_src emacs-lisp
+     (require-package 'markdown-mode)
+   #+end_src
+
+** Clojure
+
+Packages
+
+  #+begin_src emacs-lisp
+    (require-packages '(clojure-mode
+                        cider
+                        cljsbuild-mode))
+  #+end_src
+
+* Keybindings
+
+  #+begin_src emacs-lisp
+    (global-set-key (kbd "C-x m") 'eshell)
+    (global-set-key (kbd "C-c r") 'ielm)
+    (global-set-key (kbd "C-c g") 'magit-status)
+    (global-set-key (kbd "C-c f") 'file-finder)
+  #+end_src
+* Social
+
+  Add Twitter support
+
+  #+begin_src emacs-lisp
+    (require-package 'twittering-mode)
+  #+end_src
+
+  Add Jabber support
+
+  #+begin_src emacs-lisp
+    (require-package 'jabber)
+
+    (setq jabber-account-list
+          '(("mjs2600@gmail.com"
+             (:network-server . "talk.google.com")
+             (:connection-type . ssl))
+            ("mike.simpson@scimedsolutions.com"
+             (:network-server . "talk.google.com")
+             (:connection-type . ssl))))
+
+    (setq jabber-vcard-avatars-retrieve nil)
+    (setq jabber-mode-line-mode t)
+    (setq jabber-show-offline-contacts nil)
+  #+end_src
