@@ -70,6 +70,14 @@ Emacs Config
           (ido-find-file)))
   #+end_src
 
+  Find my config file
+
+  #+begin_src emacs-lisp
+    (defun find-dot-file ()
+      (interactive)
+      (find-file "~/.emacs.d/readme.org"))
+  #+end_src
+
 * Basic Configuration
 
    The purpose of this section is to make emacs a little more
@@ -214,7 +222,8 @@ Emacs Config
        "k" 'ido-kill-buffer
        "m" 'eshell
        "s" 'ack
-       "x" 'smex)
+       "x" 'smex
+       "." 'find-dot-file)
    #+end_src
 
    Disable evil in certain modes
