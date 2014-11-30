@@ -252,7 +252,7 @@ Emacs Config
       (ad-activate 'ansi-term)
     #+end_src
 
-* YASnippets
+* Snippets
 
    I'll need something to manage snippets.
 
