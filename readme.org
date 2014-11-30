@@ -23,13 +23,14 @@ Emacs Config
      (defun require-packages (package-names)
        "Install a list packages if they aren't installed"
        (cond ((symbolp package-names)
-              (require-package package-names)
+              (require-package package-names))
              ((listp package-names)
               (dolist (package-name package-names)
                 (require-package package-name)))
              (t
               ;; We handle only symbols and lists.
-              (error "Invalid argument %s in require-packages." pakage-names)))))
+              (error "Invalid argument %s in require-packages." pakage-names))))
+
    #+end_src
 
 * Personal Information
