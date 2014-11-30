@@ -261,6 +261,14 @@ Emacs Config
      (yas-global-mode 1)
    #+end_src
 
+* AutoCompletion
+
+** Company Mode
+
+   #+begin_src emacs-lisp
+     (require-packages '(company))
+     (add-hook 'after-init-hook 'global-company-mode)
+   #+end_src
 * Entertainment
 ** RSS
 
