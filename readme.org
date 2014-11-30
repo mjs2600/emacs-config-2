@@ -271,7 +271,12 @@ Emacs Config
    #+end_src
 * Entertainment
 ** RSS
+*** ElFeed
 
+#+begin_src emacs-lisp
+  (require-packages 'elfeed)
+  (evil-set-initial-state 'elfeed-show 'emacs)
+#+end_src
 
 ** Music
 
@@ -285,7 +290,6 @@ Emacs Config
 
   #+begin_src emacs-lisp
     (require-package 'flycheck)
-
   #+end_src
 
 
