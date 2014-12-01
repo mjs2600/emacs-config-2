@@ -206,7 +206,7 @@ Emacs Config
    Next I need to turn on evil-mode.
 
    #+begin_src emacs-lisp
-     ;(evil-mode t)
+     (evil-mode t)
      (global-evil-leader-mode t)
      (global-evil-surround-mode t)
    #+end_src
