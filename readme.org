@@ -85,6 +85,9 @@ Emacs Config
 
    #+begin_src emacs-lisp
      (ido-mode t)
+     (setq ido-enable-flex-matching t)
+     (setq ido-everywhere t)
+     (setq ido-auto-merge-work-directories-length -1)
    #+end_src
 
    The next step is to use =smex=, which does the same thing as ido
