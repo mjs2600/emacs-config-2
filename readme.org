@@ -136,11 +136,11 @@ Emacs Config
 * Style
 
    Let's my Emacs a little prettier. First thing I'll do pick a color
-   scheme. =zenburn= looks nice enough for now.
+   scheme. =ample-zen= looks nice enough for now.
 
    #+begin_src emacs-lisp
-     (require-package 'zenburn-theme)
-     (load-theme 'zenburn)
+     (require-package 'ample-zen-theme)
+     (load-theme 'ample-zen)
    #+end_src
 
    =pretty-mode= always makes things look a little nicer too.
