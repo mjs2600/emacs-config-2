@@ -118,6 +118,9 @@ Emacs Config
       (global-auto-revert-mode t)
    #+end_src
 
+   #+begin_src emacs-lisp
+     (setq exec-path (append exec-path '("/usr/local/bin")))
+   #+end_src
 
    I'm trying to work Helm into my workflow, so I'll need that
 
