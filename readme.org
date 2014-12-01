@@ -190,6 +190,9 @@ Emacs Config
      (global-linum-mode t)
    #+end_src
 
+   #+begin_src emacs-lisp
+     (scroll-bar-mode 0)
+   #+end_src
 * eVIl
 
    First, I need to require all of the eVIl packages that I'll use.
