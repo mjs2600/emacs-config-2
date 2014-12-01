@@ -214,7 +214,7 @@ Emacs Config
      (evil-leader/set-leader "<SPC>")
 
      (evil-leader/set-key
-       "b" 'ido-switch-buffer
+       "b" 'helm-mini
        "d" 'ido-dired
        "ff" 'file-finder
        "fg" 'ido-find-file
