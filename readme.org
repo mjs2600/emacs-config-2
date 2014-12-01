@@ -372,6 +372,12 @@ Emacs Config
      (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
      (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
    #+end_src
+
+   HaskTags
+
+   #+begin_src emacs-lisp
+     (custom-set-variables '(haskell-tags-on-save t))
+   #+end_src
 ** Markdown
 
    I need markdown support for notes
