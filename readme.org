@@ -402,7 +402,8 @@ Packages
   Add Twitter support
 
   #+begin_src emacs-lisp
-    (require-package 'twittering-mode)
+    (require-packages 'twittering-mode)
+    (setq twittering-use-master-password t)
   #+end_src
 
   Add Jabber support
