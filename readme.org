@@ -347,7 +347,12 @@ Emacs Config
 ** Elixir
 
      #+begin_src emacs-lisp
-       (require-package 'elixir-mode)
+       (require-packages '(elixir-mode
+                           alchemist))
+
+       (add-hook 'elixir-mode-hook 'alchemist-mode)
+
+       (global-exenv-mode)
      #+end_src
 ** Haskell
 
