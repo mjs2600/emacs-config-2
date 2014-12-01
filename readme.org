@@ -115,6 +115,12 @@ Emacs Config
       (global-auto-revert-mode t)
    #+end_src
 
+
+   I'm trying to work Helm into my workflow, so I'll need that
+
+   #+begin_src emacs-lisp
+     (require-packages 'helm)
+   #+end_src
 ** ELisp
 
    The next thing I'll need to feel more at home is better ELisp
