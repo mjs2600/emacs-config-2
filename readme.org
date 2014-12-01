@@ -99,6 +99,14 @@ Emacs Config
      (global-set-key (kbd "M-x") 'smex)
    #+end_src
 
+   I'm also going to create a function to open this file.
+
+   I'll also need to add all of the files in =./lib=.
+
+   #+begin_src emacs-lisp
+     (add-to-list 'load-path "~/.emacs.d/lib/")
+   #+end_src
+
    I'd also like to make sure that I'm using the latest version of org-mode.
 
    #+begin_src emacs-lisp
@@ -162,6 +170,12 @@ Emacs Config
      (global-pretty-mode)
    #+end_src
 
+   Let's get rid of the toolbar while we're at it.
+
+   #+begin_src emacs-lisp
+     (tool-bar-mode -1)
+   #+end_src
+
    Delete trailing whitespace on save.
 
    #+begin_src emacs-lisp
@@ -178,12 +192,6 @@ Emacs Config
 
    #+begin_src emacs-lisp
      (setq tab-width 2)
-   #+end_src
-
-   Remove the tool-bar.
-
-   #+begin_src emacs-lisp
-     (tool-bar-mode 0)
    #+end_src
 
    Use the default windmove bindings
@@ -223,6 +231,12 @@ Emacs Config
      (global-evil-surround-mode t)
    #+end_src
 
+   I'll disable it for a couple of modes.
+
+    #+begin_src emacs-lisp
+      (evil-set-initial-state 'pianobar 'emacs)
+    #+end_src
+
    Now I'll setup my leader key to make it match my vim setup.
 
    #+begin_src emacs-lisp
@@ -239,7 +253,6 @@ Emacs Config
        "s" 'ack
        "x" 'smex
        "." 'find-dot-file)
-   #+end_src
 
    Disable evil in certain modes
 
@@ -299,7 +312,28 @@ Emacs Config
 
    #+begin_src emacs-lisp
      (require-package 'pianobar)
+     (setq pianobar-username "xodis2600@gmail.com")
    #+end_src
+* Social
+
+** IRC
+
+   I like to ignore people coming and going in IRC so I can read the
+   actual messages.
+
+    #+begin_src emacs-lisp
+      (setq erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT"))
+    #+end_src
+
+** Twitter
+
+   Twittering mode is great for twitter.
+
+   #+begin_src emacs-lisp
+     (require-package 'twittering-mode)
+   #+end_src
+
+* Git
 * Code
   I'm giving flycheck a try for syntax checking.
 
@@ -400,6 +434,7 @@ Emacs Config
    #+begin_src emacs-lisp
      (require-package 'markdown-mode)
    #+end_src
+
 ** Clojure
 
 Packages
