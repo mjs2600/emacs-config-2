@@ -326,7 +326,7 @@ Emacs Config
    I use rbenv, so support for that is important.
 
    #+begin_src emacs-lisp
-     (setq rbenv-installation-dir "/usr/local/var/rbenv")
+     (setq rbenv-installation-dir "/usr/local")
      (require-package 'rbenv)
      (global-rbenv-mode)
    #+end_src
