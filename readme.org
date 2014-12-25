@@ -160,6 +160,7 @@ Emacs Config
 
    #+begin_src emacs-lisp
      (require-package 'rainbow-delimiters)
+     (rainbow-delimiters-mode-enable)
    #+end_src
 
 * Style
