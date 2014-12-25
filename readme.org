@@ -446,6 +446,13 @@ Packages
                         cljsbuild-mode))
   #+end_src
 
+** Racket
+
+#+begin_src emacs-lisp
+  (require-packages 'geiser)
+  (setq exec-path (append exec-path '("/Applications/Racket v6.1/bin/")))
+#+end_src
+
 * Keybindings
 
   #+begin_src emacs-lisp
