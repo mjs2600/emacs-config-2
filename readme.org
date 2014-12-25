@@ -70,7 +70,8 @@ Emacs Config
           (ido-find-file)))
   #+end_src
 
-  Find my config file
+  This function opens my this file. It's useful for binding to a key
+  combination and quickly modifying my settings.
 
   #+begin_src emacs-lisp
     (defun find-dot-file ()
