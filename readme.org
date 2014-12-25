@@ -254,6 +254,7 @@ Emacs Config
        "s" 'ack
        "x" 'smex
        "." 'find-dot-file)
+   #+end_src
 
    Disable evil in certain modes
 
