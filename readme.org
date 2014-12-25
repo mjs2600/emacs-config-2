@@ -53,14 +53,16 @@ Emacs Config
 
 * Utilites
 
-  I'm including projectile to help find things.
+  I'm including projectile to help find things. Projectile is great at
+  navigating project files.
 
   #+begin_src emacs-lisp
     (require-package 'projectile)
     (projectile-global-mode t)
   #+end_src
 
-  This is my file finder. It uses projectile if you're in a project and ido-find-file if you aren't.
+  This is my file finder. It uses projectile if you're in a project
+  and ido-find-file if you aren't.
 
   #+begin_src emacs-lisp
     (defun file-finder ()
