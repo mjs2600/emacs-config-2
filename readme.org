@@ -453,6 +453,16 @@ Packages
   (setq exec-path (append exec-path '("/Applications/Racket v6.1/bin/")))
 #+end_src
 
+** Python
+
+Packages
+
+  #+begin_src emacs-lisp
+    (require-packages '(elpy))
+    (setq exec-path (append exec-path '("/Users/mjs2600/.pyenv/shims")))
+    (elpy-enable)
+  #+end_src
+
 * Keybindings
 
   #+begin_src emacs-lisp
