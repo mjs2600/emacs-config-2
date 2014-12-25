@@ -136,7 +136,9 @@ Emacs Config
    I'm trying to work Helm into my workflow, so I'll need that
 
    #+begin_src emacs-lisp
-     (require-packages 'helm)
+     (require-packages '(helm
+                         helm-ag
+                         helm-dash))
    #+end_src
 ** ELisp
 
