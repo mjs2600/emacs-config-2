@@ -72,15 +72,6 @@ Emacs Config
           (ido-find-file)))
   #+end_src
 
-  This function opens my this file. It's useful for binding to a key
-  combination and quickly modifying my settings.
-
-  #+begin_src emacs-lisp
-    (defun find-dot-file ()
-      (interactive)
-      (find-file "~/.emacs.d/readme.org"))
-  #+end_src
-
 * Basic Configuration
 
    The purpose of this section is to make emacs a little more
@@ -93,8 +84,8 @@ Emacs Config
      (setq ido-auto-merge-work-directories-length -1)
    #+end_src
 
-   The next step is to use =smex=, which does the same thing as ido
-   mode, but for M-x.
+   The next step is to use =smex=, which does the same thing as
+   =ido-mode=, but for M-x.
 
    #+begin_src emacs-lisp
      (require-package 'smex)
@@ -102,9 +93,17 @@ Emacs Config
      (global-set-key (kbd "M-x") 'smex)
    #+end_src
 
-   I'm also going to create a function to open this file.
+  This function opens this file. It's useful for binding to a key
+  combination and quickly modifying my settings.
 
-   I'll also need to add all of the files in =./lib=.
+  #+begin_src emacs-lisp
+    (defun find-dot-file ()
+      (interactive)
+      (find-file "~/.emacs.d/readme.org"))
+  #+end_src
+
+   I'll also need to add all of the files in =./lib=. This allows me
+   to install personal packages and packages that are not on Melpa.
 
    #+begin_src emacs-lisp
      (add-to-list 'load-path "~/.emacs.d/lib/")
@@ -129,17 +128,22 @@ Emacs Config
       (global-auto-revert-mode t)
    #+end_src
 
+   Add packages installed with homebrew to my path. This should be
+   part of an OSX specific configuration section.
+
    #+begin_src emacs-lisp
      (setq exec-path (append exec-path '("/usr/local/bin")))
    #+end_src
 
-   I'm trying to work Helm into my workflow, so I'll need that
+   Helm is really awesome. This section adds =Helm= and some addition
+   helm modes.
 
    #+begin_src emacs-lisp
      (require-packages '(helm
                          helm-ag
                          helm-dash))
    #+end_src
+
 ** ELisp
 
    The next thing I'll need to feel more at home is better ELisp
